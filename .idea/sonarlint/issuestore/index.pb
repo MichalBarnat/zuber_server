@@ -7,8 +7,6 @@ a
 zuber/pom.xml,3\c\3c818203ad55763c3bd798acb6f48deb84654cc0
 e
 5zuber/src/main/java/com/bbc/zuber/model/user/Sex.java,d\6\d6a097dfbadf2ade6ae46579ebc0de1a717a9aad
-r
-Bzuber/src/main/java/com/bbc/zuber/config/kafka/KafkaListeners.java,f\3\f3dc32b0e9e3d83881ffb9269c4a88850e0a3864
 f
 6zuber/src/main/java/com/bbc/zuber/model/user/User.java,c\c\cca6dee944b68797f6a9f0b1f3be25a016d1fa62
 k
@@ -29,14 +27,8 @@ j
 :zuber/src/main/java/com/bbc/zuber/model/driver/Driver.java,b\4\b4781b1f6befcb5c0e3f763fd6708fc64ba54285
 o
 ?zuber/src/main/java/com/bbc/zuber/config/ApplicationConfig.java,5\4\54453bfdb4f324b344545e22c15cfe4614e89a1b
-„
-Tzuber/src/main/java/com/bbc/zuber/model/rideinfo/commands/CreateRideInfoCommand.java,a\2\a2de5c5d407a90ed91a994707837dbac839df264
-‘
-azuber/src/main/java/com/bbc/zuber/mappings/rideinfo/CreateRideInfoCommandToRideInfoConverter.java,3\9\392badaa5a8e80bbef00e22687e6d980a3fcfe46
 w
 Gzuber/src/main/java/com/bbc/zuber/config/kafka/KafkaProducerConfig.java,f\3\f34213abbcf7383b87b3df79ed586496982a1a0f
-d
-4zuber/src/main/java/com/bbc/zuber/mappings/Main.java,b\e\be8e69a332e78e2cf2577337ab95be79ce523e92
 z
 Jzuber/src/main/java/com/bbc/zuber/model/rideassignment/RideAssignment.java,7\5\757202b637ea0d24d4e18bd1ffdcfc497ccf90cb
 †
@@ -63,3 +55,17 @@ z
 Jzuber/src/main/java/com/bbc/zuber/repository/RideAssignmentRepository.java,1\1\11a7e0d26d22ee4d5eb748ae01e3494fe40a1749
 t
 Dzuber/src/main/java/com/bbc/zuber/service/RideAssignmentService.java,2\5\25169a38c916a404a55161ef13cce2e0c381eeaf
+k
+;zuber/src/main/java/com/bbc/zuber/kafka/KafkaListeners.java,4\3\43635b252af9a41e2717ed74c6775127dcc458ba
+
+Qzuber/src/main/java/com/bbc/zuber/exceptions/RideAssignmentNotFoundException.java,1\3\1350d09786f1f011fbd108a43ea890b20f00da27
+Š
+Zzuber/src/main/java/com/bbc/zuber/model/rideassignmentresponse/RideAssignmentResponse.java,8\9\8946e1de7f43fec6c26eb40d5e4c79d2c33b94d1
+‚
+Rzuber/src/main/java/com/bbc/zuber/repository/RideAssignmentResponseRepository.java,4\4\44b163d4ec6f477091e4cd59d3f06bfbf0dc01db
+|
+Lzuber/src/main/java/com/bbc/zuber/service/RideAssignmentResponseService.java,3\c\3c8a2dd28652cdbddd83a8c25c180097885219ce
+t
+Dzuber/src/main/java/com/bbc/zuber/repository/RideInfoRepository.java,b\2\b2c4b6287ce654a9da0346966efa8711b19345f1
+n
+>zuber/src/main/java/com/bbc/zuber/service/RideInfoService.java,d\2\d24f839f566a52f5dfdb62936e7eefaad359aac5

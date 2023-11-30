@@ -10,4 +10,11 @@ public class ServerAppApplication {
 		SpringApplication.run(ServerAppApplication.class, args);
 	}
 
+	//TODO 30.11.2023
+	// kafka serializacja i deserializacja
+	// dodac LOGGER Slf4j
+	// lokalizacja drivera + oszacowac kto najlepszy + koszt + eta
+	// liqubase testowe dane
+	// testy jednostkowe
+	// kafdrop - tez przez deocker compose gdzies wygooglowac
 }
