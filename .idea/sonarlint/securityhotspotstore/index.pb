@@ -53,3 +53,13 @@ w
 Gzuber/src/main/java/com/bbc/zuber/config/kafka/KafkaProducerConfig.java,f\3\f34213abbcf7383b87b3df79ed586496982a1a0f
 t
 Dzuber/src/main/java/com/bbc/zuber/model/riderequest/RideRequest.java,9\c\9c9da6ca3ed09eac3daaee0895873e04b026efff
+S
+#.idea/sonarlint/issuestore/index.pb,9\f\9fe84ebb15faf917b7def6236dba604453cc61e0
+]
+-.idea/sonarlint/securityhotspotstore/index.pb,8\8\88a9255124c95bdc913197c120a8d560edc59c8e
+z
+Jzuber/src/main/java/com/bbc/zuber/repository/RideAssignmentRepository.java,1\1\11a7e0d26d22ee4d5eb748ae01e3494fe40a1749
+t
+Dzuber/src/main/java/com/bbc/zuber/config/kafka/KafkaTopicConfig.java,3\5\358900150fce75a9e8d15787603ea75e4f6664ac
+t
+Dzuber/src/main/java/com/bbc/zuber/service/RideAssignmentService.java,2\5\25169a38c916a404a55161ef13cce2e0c381eeaf

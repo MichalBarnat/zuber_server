@@ -1,9 +1,7 @@
 
-L	java:S106"+Replace this use of System.out by a logger.(ÅæÒ‚úÿÿÿÿ8‘ æ¸Á1
-G	java:S106 "+Replace this use of System.out by a logger.(Üç†‹8’ æ¸Á1
-G	java:S106&"+Replace this use of System.out by a logger.(ù„ğ8’ æ¸Á1
-G	java:S106("+Replace this use of System.out by a logger.(ÈÜ™ˆ8€»¹¹Á1
+L	java:S106"+Replace this use of System.out by a logger.(›€¬Áıÿÿÿÿ8‘ æ¸Á1
+G	java:S106$"+Replace this use of System.out by a logger.(ÛíÈ—8’ æ¸Á1
+G	java:S106*"+Replace this use of System.out by a logger.(ù„ğ8’ æ¸Á1
+G	java:S106,"+Replace this use of System.out by a logger.(ÈÜ™ˆ8€»¹¹Á1
 O
-java:S1135+"2Complete the task associated to this TODO comment.(«öÉí8“ æ¸Á1
-M
-java:S1128"+Remove this unused import 'java.util.List'.(Õë±Äøÿÿÿÿ8ëãÈ¹Á1
+java:S11356"2Complete the task associated to this TODO comment.(«öÉí8“ æ¸Á1
