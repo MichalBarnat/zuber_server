@@ -2,6 +2,16 @@ docker exec -it resources-kafka-1 bash
 
 cd /opt/bitnami/kafka/bin/
 
+#CONSUMER TOPICS
+
 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic user-registration --from-beginning
 
+#DELETE TOPICS
+
 kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic user-registration
+
+kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic driver-registration
+
+kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic ride-request
+
+kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic ride-assignment

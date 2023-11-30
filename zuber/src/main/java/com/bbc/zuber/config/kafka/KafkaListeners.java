@@ -13,8 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 @RequiredArgsConstructor
 public class KafkaListeners {
@@ -36,17 +34,19 @@ public class KafkaListeners {
         System.out.println("Succesfully saved driver from zuber_driver");
     }
 
-    @KafkaListener(topics = "riderequest")
+    @KafkaListener(topics = "ride-request")
     void rideRequestListener(RideRequest rideRequest) {
         rideRequestService.save(rideRequest);
         System.out.println("Ride request successfully saved [from zuber_user]");
         Driver driver = driverService.getFirstAvailableDriver();
         System.out.println("Driver who will be ask for ride: " + driver);
+
         RideAssignment rideAssignment = RideAssignment.builder()
                 .rideRequestUUID(rideRequest.getUuid())
                 .driverUUID(driver.getUuid())
                 .status(RideAssignmentStatus.PENDING)
                 .build();
+
         rideAssignmentService.save(rideAssignment);
 
     }

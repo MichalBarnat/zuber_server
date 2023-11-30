@@ -77,16 +77,13 @@
             <column name="id" type="BIGINT">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="uuid" type="UUID">
-                <constraints nullable="false" unique="true"/>
-            </column>
-            <column name="ride_request_uuid" type="UUID">
+            <column name="ride_requestuuid" type="UUID">
                 <constraints nullable="false"/>
             </column>
-            <column name="driver_uuid" type="UUID">
+            <column name="driveruuid" type="UUID">
                 <constraints nullable="false"/>
             </column>
-            <column name="assignment_time" type="VARCHAR(255)">
+            <column name="status" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
         </createTable>

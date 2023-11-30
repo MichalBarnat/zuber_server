@@ -14,8 +14,9 @@ public class RideAssignmentService {
     private final KafkaTemplate<String, RideAssignment> rideAssignmentKafkaTemplate;
 
     public RideAssignment save(RideAssignment rideAssignment) {
-        rideAssignmentKafkaTemplate.send("ride-assignment", rideAssignment);
-        return rideAssignmentRepository.save(rideAssignment);
+        RideAssignment savedAssignment = rideAssignmentRepository.save(rideAssignment);
+        rideAssignmentKafkaTemplate.send("ride-assignment", savedAssignment);
+        return savedAssignment;
     }
 
 }
