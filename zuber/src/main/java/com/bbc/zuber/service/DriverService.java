@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -22,6 +23,18 @@ public class DriverService {
         return driverRepository.findAll().stream()
                 .filter(driver -> driver.getStatusDriver() == StatusDriver.AVAILABLE)
                 .toList();
+    }
+
+    public List<Driver> findAll() {
+        return driverRepository.findAll();
+    }
+
+    public Driver findByUUID(UUID uuid) {
+        return findAll()
+                .stream()
+                .filter(driver -> driver.getUuid().equals(uuid))
+                .findFirst()
+                .orElseThrow();
     }
 
     public Driver getFirstAvailableDriver() {

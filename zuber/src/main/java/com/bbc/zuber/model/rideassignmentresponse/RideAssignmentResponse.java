@@ -1,4 +1,4 @@
-package com.bbc.zuber.model.rideinfo;
+package com.bbc.zuber.model.rideassignmentresponse;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,19 +9,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
-@Entity(name = "ride_info")
+@Entity(name = "ride_assignment_response")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class RideInfo {
+public class RideAssignmentResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private UUID userUuid;
-    private UUID driverUuid;
-    private String driverName;
-    private String driverLocation;
+    private Boolean accepted;
 }

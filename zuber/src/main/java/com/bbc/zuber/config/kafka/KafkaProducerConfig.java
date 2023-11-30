@@ -1,6 +1,7 @@
 package com.bbc.zuber.config.kafka;
 
 import com.bbc.zuber.model.rideassignment.RideAssignment;
+import com.bbc.zuber.model.rideinfo.RideInfo;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,6 +36,16 @@ public class KafkaProducerConfig {
     @Bean
     public KafkaTemplate<String, RideAssignment> rideAssignmentKafkaTemplate() {
         return new KafkaTemplate<>(rideAssignmentProducerFactory());
+    }
+
+    @Bean
+    public ProducerFactory<String, RideInfo> rideInfoProducerFactory() {
+        return new DefaultKafkaProducerFactory<>(producerConfig());
+    }
+
+    @Bean
+    public KafkaTemplate<String, RideInfo> rideInfoKafkaTemplate() {
+        return new KafkaTemplate<>(rideInfoProducerFactory());
     }
 
 
