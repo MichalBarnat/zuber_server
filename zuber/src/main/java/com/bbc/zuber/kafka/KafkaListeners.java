@@ -35,7 +35,7 @@ public class KafkaListeners {
             userService.save(user);
             System.out.println("successfully saved user from zuber_user");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException("Problem with save user from zuber_user");
         }
     }
 
@@ -46,7 +46,7 @@ public class KafkaListeners {
             driverService.save(driver);
             System.out.println("Successfully saved driver from zuber_driver");
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IllegalArgumentException("Problem with save driver from zuber_driver");
         }
     }
 

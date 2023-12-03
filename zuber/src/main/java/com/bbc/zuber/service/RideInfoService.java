@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 public class RideInfoService {
 
     private final RideInfoRepository rideInfoRepository;
-    private final KafkaTemplate<String, RideInfo> rideInfoKafkaTemplate;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
 
     public RideInfo save(RideInfo rideInfo) {
         RideInfo savedRideInfo = rideInfoRepository.save(rideInfo);
-        rideInfoKafkaTemplate.send("ride-info", savedRideInfo);
+        kafkaTemplate.send("ride-info", savedRideInfo);
         return savedRideInfo;
     }
 

@@ -1,8 +1,6 @@
 
 w
 Gzuber/src/main/java/com/bbc/zuber/config/kafka/KafkaConsumerConfig.java,9\9\99088649aba94f81cc3fae792ad9a365cca2d1ed
-a
-1zuber/src/main/java/com/bbc/zuber/model/Main.java,5\c\5cbe2883e215dd91abc8dd4ed491797f84c9d8dc
 =
 zuber/pom.xml,3\c\3c818203ad55763c3bd798acb6f48deb84654cc0
 e
@@ -27,10 +25,6 @@ j
 :zuber/src/main/java/com/bbc/zuber/model/driver/Driver.java,b\4\b4781b1f6befcb5c0e3f763fd6708fc64ba54285
 o
 ?zuber/src/main/java/com/bbc/zuber/config/ApplicationConfig.java,5\4\54453bfdb4f324b344545e22c15cfe4614e89a1b
-s
-Czuber/src/main/java/com/bbc/zuber/model/riderequest/enums/Size.java,5\5\5585a8160d9693586ea10f4fa24af42861c785eb
-s
-Czuber/src/main/java/com/bbc/zuber/model/riderequest/enums/Type.java,9\3\935b403c57b434700fbe555d60bb88c21cf9c88b
 z
 Jzuber/src/main/java/com/bbc/zuber/model/rideassignment/RideAssignment.java,7\5\757202b637ea0d24d4e18bd1ffdcfc497ccf90cb
 †
@@ -69,3 +63,19 @@ Lzuber/src/main/java/com/bbc/zuber/service/RideAssignmentResponseService.java,3
 Rzuber/src/main/java/com/bbc/zuber/repository/RideAssignmentResponseRepository.java,4\4\44b163d4ec6f477091e4cd59d3f06bfbf0dc01db
 n
 >zuber/src/main/java/com/bbc/zuber/service/RideInfoService.java,d\2\d24f839f566a52f5dfdb62936e7eefaad359aac5
+y
+Izuber/src/main/java/com/bbc/zuber/exceptions/DriverNotFoundException.java,4\f\4f85f0114419fd14906b1c2ad4d4a3df8decaa58
+ƒ
+Szuber/src/main/java/com/bbc/zuber/model/googledistancematrix/DistanceMatrixRow.java,9\0\9033001cad0f2aa00d4620f08d478e65d2c6e02d
+ˆ
+Xzuber/src/main/java/com/bbc/zuber/model/googledistancematrix/DistanceMatrixResponse.java,f\7\f7c421923e9273a659ccfec1055687182871168b
+~
+Nzuber/src/main/java/com/bbc/zuber/exceptions/DriversNotAvailableException.java,d\a\da53780241384a62d2bd0ef59dc7e539be5d344f
+ˆ
+Xzuber/src/main/java/com/bbc/zuber/model/googledistancematrix/DistanceMatrixDistance.java,3\c\3c5a3734b4144883672866e11753a1cb4a136b71
+ˆ
+Xzuber/src/main/java/com/bbc/zuber/model/googledistancematrix/DistanceMatrixDuration.java,1\e\1e1b5b64e551f11d5e603d22f2c2d7d89df7b611
+‡
+Wzuber/src/main/java/com/bbc/zuber/model/googledistancematrix/DistanceMatrixElement.java,5\3\53a33984c7635bb98ab1630ed09d6b4466af27d0
+z
+Jzuber/src/main/java/com/bbc/zuber/service/GoogleDistanceMatrixService.java,c\d\cd65da964751387f58f245758ca66783305dafdf

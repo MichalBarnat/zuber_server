@@ -13,11 +13,11 @@ import org.springframework.stereotype.Service;
 public class RideAssignmentService {
 
     private final RideAssignmentRepository rideAssignmentRepository;
-    private final KafkaTemplate<String, RideAssignment> rideAssignmentKafkaTemplate;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
 
     public RideAssignment save(RideAssignment rideAssignment) {
         RideAssignment savedAssignment = rideAssignmentRepository.save(rideAssignment);
-        rideAssignmentKafkaTemplate.send("ride-assignment", savedAssignment);
+        kafkaTemplate.send("ride-assignment", savedAssignment);
         return savedAssignment;
     }
 
