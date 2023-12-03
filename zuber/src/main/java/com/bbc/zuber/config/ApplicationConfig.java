@@ -1,5 +1,7 @@
 package com.bbc.zuber.config;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -15,6 +17,13 @@ public class ApplicationConfig {
         ModelMapper modelMapper = new ModelMapper();
         converters.forEach(modelMapper::addConverter);
         return modelMapper;
+    }
+
+    @Bean
+    public ObjectMapper objectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        //objectMapper.configure(DeserializationFeature.)
+        return objectMapper;
     }
 
 }
