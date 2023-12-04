@@ -79,3 +79,11 @@ Xzuber/src/main/java/com/bbc/zuber/model/googledistancematrix/DistanceMatrixDura
 Wzuber/src/main/java/com/bbc/zuber/model/googledistancematrix/DistanceMatrixElement.java,5\3\53a33984c7635bb98ab1630ed09d6b4466af27d0
 z
 Jzuber/src/main/java/com/bbc/zuber/service/GoogleDistanceMatrixService.java,c\d\cd65da964751387f58f245758ca66783305dafdf
+~
+Nzuber/src/main/java/com/bbc/zuber/model/riderequest/enums/RideRequestSize.java,a\2\a2ccd98090779725f716bef20051770fa80860a6
+~
+Nzuber/src/main/java/com/bbc/zuber/model/riderequest/enums/RideRequestType.java,3\4\34927b4c9dece52ae58c1797c2abcb9c76f2cd8e
+d
+4zuber/src/main/java/com/bbc/zuber/test/TestBody.java,d\c\dc692d035f8951c22e89b7341d003a6197b83d15
+j
+:zuber/src/main/java/com/bbc/zuber/test/ControllerTest.java,b\e\bede064b02603d83a70b039e8647500ec46e864e

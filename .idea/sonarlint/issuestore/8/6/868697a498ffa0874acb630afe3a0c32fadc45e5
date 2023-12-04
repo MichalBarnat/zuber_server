@@ -1,8 +1,8 @@
 
-X	java:S125"<This block of commented-out lines of code should be removed.(±”Ç×8àòæ‚Ã1
+X	java:S125"<This block of commented-out lines of code should be removed.(±”Ç×8àòæ‚Ã1
 t
-java:S3776:"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(ğÖà¡øÿÿÿÿ8âòæ‚Ã1
+java:S3776;"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(ğÖà¡øÿÿÿÿ8âòæ‚Ã1
 ]
-java:S1854N"@Remove this useless assignment to local variable "distanceText".(ÀùÃÜ8âòæ‚Ã1
+java:S1854O"@Remove this useless assignment to local variable "distanceText".(ÀùÃÜ8âòæ‚Ã1
 N
-java:S1481N"1Remove this unused "distanceText" local variable.(ÀùÃÜ8ãòæ‚Ã1
+java:S1481O"1Remove this unused "distanceText" local variable.(ÀùÃÜ8ãòæ‚Ã1
