@@ -1,8 +1,11 @@
 package com.bbc.zuber.config.kafka;
 
 import com.bbc.zuber.model.rideassignment.RideAssignment;
+import com.bbc.zuber.model.rideinfo.RideInfo;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +19,9 @@ import java.util.Map;
 
 @Configuration
 public class KafkaProducerConfig {
+    @Autowired
+    private ObjectMapper objectMapper;
+
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServer;
 
@@ -28,14 +34,18 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<String, RideAssignment> rideAssignmentProducerFactory() {
-        return new DefaultKafkaProducerFactory<>(producerConfig());
+    public ProducerFactory<String, Object> producerFactory() {
+        Map<String, Object> producerConfigs = producerConfig();
+        return new DefaultKafkaProducerFactory<>(
+                producerConfigs,
+                new StringSerializer(),
+                new JsonSerializer<>(objectMapper)
+        );
     }
 
     @Bean
-    public KafkaTemplate<String, RideAssignment> rideAssignmentKafkaTemplate() {
-        return new KafkaTemplate<>(rideAssignmentProducerFactory());
+    public KafkaTemplate<String, Object> kafkaTemplate() {
+        return new KafkaTemplate<>(producerFactory());
     }
-
 
 }

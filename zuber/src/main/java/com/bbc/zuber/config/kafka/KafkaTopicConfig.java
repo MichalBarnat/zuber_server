@@ -12,4 +12,10 @@ public class KafkaTopicConfig {
                 .build();
     }
 
+    @Bean
+    public NewTopic rideInfoTopic() {
+        return TopicBuilder.name("ride-info")
+                .build();
+    }
+
 }

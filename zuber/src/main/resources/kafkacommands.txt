@@ -5,6 +5,7 @@ cd /opt/bitnami/kafka/bin/
 #CONSUMER TOPICS
 
 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic user-registration --from-beginning
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic ride-info --from-beginning
 
 #DELETE TOPICS
 
@@ -15,3 +16,18 @@ kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic driver-regist
 kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic ride-request
 
 kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic ride-assignment
+
+kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic ride-assignment-response
+
+
+
+
+
+#DELETE ALL TOPICS
+
+topics=$(kafka-topics.sh --bootstrap-server localhost:9092 --list)
+
+for topic in $topics
+do
+  kafka-topics.sh --bootstrap-server localhost:9092 --delete --topic "$topic"
+done

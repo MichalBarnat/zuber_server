@@ -20,6 +20,8 @@ public class RideAssignment {
     private Long id;
     private UUID rideRequestUUID;
     private UUID driverUUID;
+    private String pickUpLocation;
+    private String dropOffLocation;
     @Enumerated(EnumType.STRING)
     private RideAssignmentStatus status;
 }
