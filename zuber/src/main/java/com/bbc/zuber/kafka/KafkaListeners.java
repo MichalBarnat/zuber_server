@@ -1,5 +1,6 @@
 package com.bbc.zuber.kafka;
 
+import com.bbc.zuber.exceptions.KafkaMessageProcessingException;
 import com.bbc.zuber.model.driver.Driver;
 import com.bbc.zuber.model.rideassignment.RideAssignment;
 import com.bbc.zuber.model.rideassignment.enums.RideAssignmentStatus;
@@ -8,6 +9,7 @@ import com.bbc.zuber.model.rideinfo.RideInfo;
 import com.bbc.zuber.model.riderequest.RideRequest;
 import com.bbc.zuber.model.user.User;
 import com.bbc.zuber.service.*;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -35,7 +37,7 @@ public class KafkaListeners {
             userService.save(user);
             System.out.println("successfully saved user from zuber_user");
         } catch (IOException e) {
-            throw new IllegalArgumentException("Problem with save user from zuber_user");
+            throw new KafkaMessageProcessingException("Problem with save user from zuber_user");
         }
     }
 
@@ -46,7 +48,7 @@ public class KafkaListeners {
             driverService.save(driver);
             System.out.println("Successfully saved driver from zuber_driver");
         } catch (IOException e) {
-            throw new IllegalArgumentException("Problem with save driver from zuber_driver");
+            throw new KafkaMessageProcessingException("Problem with save driver from zuber_driver");
         }
     }
 
@@ -56,7 +58,9 @@ public class KafkaListeners {
             RideRequest rideRequest = objectMapper.readValue(rideRequestJson, RideRequest.class);
             rideRequestService.save(rideRequest);
             System.out.println("Ride request successfully saved [from zuber_user]");
-            Driver driver = driverService.getFirstAvailableDriver();
+            JsonNode jsonNode = objectMapper.readTree(rideRequestJson);
+            String pickUpLocationFromJson = jsonNode.get("pickUpLocation").asText();
+            Driver driver = driverService.getNearestAvailableDriver(pickUpLocationFromJson);
             System.out.println("Driver who will be asked for a ride: " + driver);
 
             RideAssignment rideAssignment = RideAssignment.builder()
@@ -69,7 +73,7 @@ public class KafkaListeners {
 
             rideAssignmentService.save(rideAssignment);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new KafkaMessageProcessingException("Problem with save ride-request from zuber_user");
         }
     }
 
@@ -88,15 +92,14 @@ public class KafkaListeners {
                     .userUuid(rideRequest.getUserId())
                     .driverUuid(rideAssignment.getDriverUUID())
                     .driverName(driver.getName())
-                    .driverLocation("RADOM")
+                    .driverLocation(driver.getLocation())
                     .build();
 
             rideInfoService.save(rideInfo);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new KafkaMessageProcessingException("Problem with save ride-request from zuber_driver");
         }
     }
-
 
 
 //    @KafkaListener(topics = "user-registration")
@@ -149,7 +152,6 @@ public class KafkaListeners {
 //
 //        rideInfoService.save(rideInfo);
 //    }
-
 
 
     //TODO dodac LOGGERA

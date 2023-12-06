@@ -24,12 +24,6 @@ public class DriverService {
         return driverRepository.save(driver);
     }
 
-//    public List<Driver> availableDrivers() {
-//        return driverRepository.findAll().stream()
-//                .filter(driver -> driver.getStatusDriver() == StatusDriver.AVAILABLE)
-//                .toList();
-//    }
-
     public List<Driver> availableDrivers() {
         return driverRepository.findAllByStatusDriver(StatusDriver.AVAILABLE);
     }
@@ -44,16 +38,6 @@ public class DriverService {
                 .filter(driver -> driver.getUuid().equals(uuid))
                 .findFirst()
                 .orElseThrow(() -> new DriverNotFoundException(String.format("Driver with uuid: %s not found!", uuid)));
-    }
-
-    public Driver getFirstAvailableDriver() {
-        Driver driver;
-        if(!availableDrivers().isEmpty()) {
-            driver = availableDrivers().get(0);
-        } else {
-            throw new IllegalArgumentException("No drivers available!");
-        }
-        return driver;
     }
 
     public Driver getNearestAvailableDriver(String pickUpLocation) {
@@ -76,7 +60,7 @@ public class DriverService {
                     if (!elements.isEmpty()) {
                         DistanceMatrixDistance distance = elements.get(0).getDistance();
                         if (distance != null) {
-                            String distanceText = distance.getText();
+                            //String distanceText = distance.getText();
                             int distanceValue = distance.getValue();
 
                             if (distanceValue < shortestDistance) {
