@@ -28,3 +28,6 @@ public class RideRequest {
     private RideRequestSize size;
     private String date;
 }
+
+//todo localdate na date
+// jesli klient zamawia przejazd w godzinach nocnych to drozej 22:00/06:00 20% drozej

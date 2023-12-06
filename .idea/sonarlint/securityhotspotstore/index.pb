@@ -87,3 +87,5 @@ d
 Nzuber/src/main/java/com/bbc/zuber/model/riderequest/enums/RideRequestType.java,3\4\34927b4c9dece52ae58c1797c2abcb9c76f2cd8e
 j
 :zuber/src/main/java/com/bbc/zuber/test/ControllerTest.java,b\e\bede064b02603d83a70b039e8647500ec46e864e
+Å
+Qzuber/src/main/java/com/bbc/zuber/exceptions/KafkaMessageProcessingException.java,7\f\7fd97b54f37988c2dc03ac825417d971453954ac

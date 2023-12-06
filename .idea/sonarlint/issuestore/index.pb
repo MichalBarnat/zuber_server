@@ -87,3 +87,5 @@ d
 4zuber/src/main/java/com/bbc/zuber/test/TestBody.java,d\c\dc692d035f8951c22e89b7341d003a6197b83d15
 j
 :zuber/src/main/java/com/bbc/zuber/test/ControllerTest.java,b\e\bede064b02603d83a70b039e8647500ec46e864e
+Å
+Qzuber/src/main/java/com/bbc/zuber/exceptions/KafkaMessageProcessingException.java,7\f\7fd97b54f37988c2dc03ac825417d971453954ac

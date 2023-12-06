@@ -20,10 +20,12 @@ public class RideInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private UUID rideAssignmentUuid;
     private UUID userUuid;
     private UUID driverUuid;
     private String driverName;
     private String driverLocation;
 
     //todo dodac skąd dokąd i za jaki czas dojedzie ETA
+    // dodac ile km ma trasa oraz jaki czas przejazdu
 }

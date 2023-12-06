@@ -12,6 +12,8 @@ import com.bbc.zuber.service.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +22,7 @@ import java.io.IOException;
 @Component
 @RequiredArgsConstructor
 public class KafkaListeners {
+    private final Logger logger = LoggerFactory.getLogger(KafkaListeners.class);
 
     private final UserService userService;
     private final DriverService driverService;
@@ -27,7 +30,6 @@ public class KafkaListeners {
     private final RideAssignmentService rideAssignmentService;
     private final RideAssignmentResponseService rideAssignmentResponseService;
     private final RideInfoService rideInfoService;
-
     private final ObjectMapper objectMapper;
 
     @KafkaListener(topics = "user-registration")
@@ -35,7 +37,7 @@ public class KafkaListeners {
         try {
             User user = objectMapper.readValue(userJson, User.class);
             userService.save(user);
-            System.out.println("successfully saved user from zuber_user");
+            logger.info("Successfully saved user from zuber_user");
         } catch (IOException e) {
             throw new KafkaMessageProcessingException("Problem with save user from zuber_user");
         }
@@ -89,6 +91,7 @@ public class KafkaListeners {
             Driver driver = driverService.findByUUID(rideAssignment.getDriverUUID());
 
             RideInfo rideInfo = RideInfo.builder()
+                    .rideAssignmentUuid(rideAssignment.getUuid())
                     .userUuid(rideRequest.getUserId())
                     .driverUuid(rideAssignment.getDriverUUID())
                     .driverName(driver.getName())
@@ -102,58 +105,7 @@ public class KafkaListeners {
     }
 
 
-//    @KafkaListener(topics = "user-registration")
-//    void userRegistrationListener(User user) {
-//        userService.save(user);
-//        System.out.println("succesfully saved user from zuber_user");
-//    }
-//
-//    @KafkaListener(topics = "driver-registration")
-//    void driverRegistrationListener(Driver driver) {
-//        driverService.save(driver);
-//        System.out.println("Succesfully saved driver from zuber_driver");
-//    }
-//
-//    @KafkaListener(topics = "ride-request")
-//    void rideRequestListener(RideRequest rideRequest) {
-//        rideRequestService.save(rideRequest);
-//        System.out.println("Ride request successfully saved [from zuber_user]");
-//        Driver driver = driverService.getFirstAvailableDriver();
-//        System.out.println("Driver who will be ask for ride: " + driver);
-//
-//        RideAssignment rideAssignment = RideAssignment.builder()
-//                .rideRequestUUID(rideRequest.getUuid())
-//                .driverUUID(driver.getUuid())
-//                .pickUpLocation(rideRequest.getPickUpLocation())
-//                .dropOffLocation(rideRequest.getDropOffLocation())
-//                .status(RideAssignmentStatus.PENDING)
-//                .build();
-//
-//        rideAssignmentService.save(rideAssignment);
-//
-//    }
-//
-//    @KafkaListener(topics = "ride-assignment-response")
-//    void rideAssignmentResponseListener(RideAssignmentResponse rideAssignmentResponse) {
-//        rideAssignmentResponseService.save(rideAssignmentResponse);
-//        rideAssignmentService.updateStatus(rideAssignmentResponse.getId(), rideAssignmentResponse.getAccepted());
-//        System.out.println("Successfully updated RideAssignment status!");
-//
-//        RideAssignment rideAssignment = rideAssignmentService.findById(rideAssignmentResponse.getId());
-//        RideRequest rideRequest = rideRequestService.findByUUID(rideAssignment.getRideRequestUUID());
-//        Driver driver = driverService.findByUUID(rideAssignment.getDriverUUID());
-//
-//        RideInfo rideInfo = RideInfo.builder()
-//                .userUuid(rideRequest.getUserId())
-//                .driverUuid(rideAssignment.getDriverUUID())
-//                .driverName(driver.getName())
-//                .driverLocation("RADOM")
-//                .build();
-//
-//        rideInfoService.save(rideInfo);
-//    }
+    //TODO oblsuzyc na topicu ride-cancel (zmienic assignment na status CANCELLED) i wyslac info do drivera i uzytkownika
 
-
-    //TODO dodac LOGGERA
 
 }
