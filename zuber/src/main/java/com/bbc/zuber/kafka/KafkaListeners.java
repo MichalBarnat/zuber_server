@@ -18,6 +18,9 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -28,9 +31,9 @@ public class KafkaListeners {
     private final DriverService driverService;
     private final RideRequestService rideRequestService;
     private final RideAssignmentService rideAssignmentService;
-    private final RideAssignmentResponseService rideAssignmentResponseService;
     private final RideInfoService rideInfoService;
     private final ObjectMapper objectMapper;
+    private final GoogleDistanceMatrixService googleDistanceMatrixService;
 
     @KafkaListener(topics = "user-registration")
     void userRegistrationListener(String userJson) {
@@ -48,7 +51,7 @@ public class KafkaListeners {
         try {
             Driver driver = objectMapper.readValue(driverJson, Driver.class);
             driverService.save(driver);
-            System.out.println("Successfully saved driver from zuber_driver");
+            logger.info("Successfully saved driver from zuber_driver");
         } catch (IOException e) {
             throw new KafkaMessageProcessingException("Problem with save driver from zuber_driver");
         }
@@ -59,13 +62,17 @@ public class KafkaListeners {
         try {
             RideRequest rideRequest = objectMapper.readValue(rideRequestJson, RideRequest.class);
             rideRequestService.save(rideRequest);
-            System.out.println("Ride request successfully saved [from zuber_user]");
+
+            logger.info("Ride request successfully saved [from zuber_user]");
+
             JsonNode jsonNode = objectMapper.readTree(rideRequestJson);
             String pickUpLocationFromJson = jsonNode.get("pickUpLocation").asText();
             Driver driver = driverService.getNearestAvailableDriver(pickUpLocationFromJson);
-            System.out.println("Driver who will be asked for a ride: " + driver);
+
+            logger.info("Driver who will be asked for a ride: {}", driver);
 
             RideAssignment rideAssignment = RideAssignment.builder()
+                    .uuid(UUID.randomUUID())
                     .rideRequestUUID(rideRequest.getUuid())
                     .driverUUID(driver.getUuid())
                     .pickUpLocation(rideRequest.getPickUpLocation())
@@ -74,6 +81,7 @@ public class KafkaListeners {
                     .build();
 
             rideAssignmentService.save(rideAssignment);
+
         } catch (IOException e) {
             throw new KafkaMessageProcessingException("Problem with save ride-request from zuber_user");
         }
@@ -84,11 +92,17 @@ public class KafkaListeners {
         try {
             RideAssignmentResponse rideAssignmentResponse = objectMapper.readValue(rideAssignmentResponseJson, RideAssignmentResponse.class);
             rideAssignmentService.updateStatus(rideAssignmentResponse.getId(), rideAssignmentResponse.getAccepted());
-            System.out.println("Successfully updated RideAssignment status!");
+
+            logger.info("Successfully updated RideAssignment status!");
 
             RideAssignment rideAssignment = rideAssignmentService.findById(rideAssignmentResponse.getId());
             RideRequest rideRequest = rideRequestService.findByUUID(rideAssignment.getRideRequestUUID());
             Driver driver = driverService.findByUUID(rideAssignment.getDriverUUID());
+            LocalDateTime now = LocalDateTime.now();
+            String from = rideRequest.getPickUpLocation();
+            String to = rideRequest.getDropOffLocation();
+
+            int distanceBetween = googleDistanceMatrixService.getDistanceInt(from, to);
 
             RideInfo rideInfo = RideInfo.builder()
                     .rideAssignmentUuid(rideAssignment.getUuid())
@@ -96,6 +110,14 @@ public class KafkaListeners {
                     .driverUuid(rideAssignment.getDriverUUID())
                     .driverName(driver.getName())
                     .driverLocation(driver.getLocation())
+                    .pickUpLocation(rideRequest.getPickUpLocation())
+                    .dropUpLocation(rideRequest.getDropOffLocation())
+                    .orderTime(now)
+                    .estimatedArrivalTime(now.plusSeconds(googleDistanceMatrixService.getDurationInt(from, to)))
+                    .costOfRide(BigDecimal.valueOf(distanceBetween * 0.002))
+                    //todo zaimplementuj stawki czasowe
+                    .timeToArrivalInMinutes(googleDistanceMatrixService.getDurationString(from, to))
+                    .rideLengthInKilometers(googleDistanceMatrixService.getDistanceString(from, to))
                     .build();
 
             rideInfoService.save(rideInfo);
