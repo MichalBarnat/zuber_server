@@ -18,4 +18,10 @@ public class KafkaTopicConfig {
                 .build();
     }
 
+    @Bean
+    public NewTopic fundsAvailabilityResponse() {
+        return TopicBuilder.name("funds-availability-response")
+                .build();
+    }
+
 }

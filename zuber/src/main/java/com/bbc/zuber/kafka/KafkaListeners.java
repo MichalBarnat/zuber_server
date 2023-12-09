@@ -1,6 +1,7 @@
 package com.bbc.zuber.kafka;
 
 import com.bbc.zuber.exceptions.KafkaMessageProcessingException;
+import com.bbc.zuber.model.FundsAvailabilityResponse;
 import com.bbc.zuber.model.driver.Driver;
 import com.bbc.zuber.model.rideassignment.RideAssignment;
 import com.bbc.zuber.model.rideassignment.enums.RideAssignmentStatus;
@@ -9,12 +10,14 @@ import com.bbc.zuber.model.rideinfo.RideInfo;
 import com.bbc.zuber.model.riderequest.RideRequest;
 import com.bbc.zuber.model.user.User;
 import com.bbc.zuber.service.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -34,6 +37,7 @@ public class KafkaListeners {
     private final RideInfoService rideInfoService;
     private final ObjectMapper objectMapper;
     private final GoogleDistanceMatrixService googleDistanceMatrixService;
+    private final KafkaTemplate<String, Object> kafkaTemplate;
 
     @KafkaListener(topics = "user-registration")
     void userRegistrationListener(String userJson) {
@@ -124,6 +128,24 @@ public class KafkaListeners {
         } catch (IOException e) {
             throw new KafkaMessageProcessingException("Problem with save ride-request from zuber_driver");
         }
+    }
+
+    @KafkaListener(topics = "user-funds-availability")
+    void userFundsAvailabilityListener(String fundsAvailabilityJson) throws JsonProcessingException {
+        JsonNode jsonNode = objectMapper.readTree(fundsAvailabilityJson);
+        UUID uuid = UUID.fromString(jsonNode.get("uuid").asText());
+        String from = jsonNode.get("pickUpLocation").asText();
+        String to = jsonNode.get("dropOffLocation").asText();
+        BigDecimal cost = BigDecimal.valueOf(googleDistanceMatrixService.getDistanceInt(from, to) * 0.002);
+
+        FundsAvailabilityResponse response = FundsAvailabilityResponse.builder()
+                .uuid(uuid)
+                .cost(cost)
+                .build();
+
+        String responseJson = objectMapper.writeValueAsString(response);
+
+        kafkaTemplate.send("funds-availability-response", responseJson);
     }
 
 
