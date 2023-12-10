@@ -2,6 +2,7 @@ package com.bbc.zuber.kafka;
 
 import com.bbc.zuber.exceptions.KafkaMessageProcessingException;
 import com.bbc.zuber.model.FundsAvailabilityResponse;
+import com.bbc.zuber.model.car.Car;
 import com.bbc.zuber.model.driver.Driver;
 import com.bbc.zuber.model.rideassignment.RideAssignment;
 import com.bbc.zuber.model.rideassignment.enums.RideAssignmentStatus;
@@ -54,6 +55,9 @@ public class KafkaListeners {
     void driverRegistrationListener(String driverJson) {
         try {
             Driver driver = objectMapper.readValue(driverJson, Driver.class);
+            if(driver.getCar() != null) {
+                driver.getCar().setDriver(driver);
+            }
             driverService.save(driver);
             logger.info("Successfully saved driver from zuber_driver");
         } catch (IOException e) {

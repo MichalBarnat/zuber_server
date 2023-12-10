@@ -29,7 +29,7 @@ public class Car {
     private TypeOfCar type;
     private int size;
     private String plateNum;
-    @OneToOne(mappedBy = "car", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "DRIVER_UUID", referencedColumnName = "uuid")
     private Driver driver;
 }
