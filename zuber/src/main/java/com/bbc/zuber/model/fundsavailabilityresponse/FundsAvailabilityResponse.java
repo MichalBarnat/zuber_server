@@ -10,5 +10,6 @@ import java.util.UUID;
 @Builder
 public class FundsAvailabilityResponse {
     private UUID uuid;
+    private UUID userUuid;
     private BigDecimal cost;
 }

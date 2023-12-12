@@ -137,6 +137,7 @@ public class KafkaListeners {
     void userFundsAvailabilityListener(String fundsAvailabilityJson) throws JsonProcessingException {
         JsonNode jsonNode = objectMapper.readTree(fundsAvailabilityJson);
         UUID uuid = UUID.fromString(jsonNode.get("uuid").asText());
+        UUID userUuid = UUID.fromString(jsonNode.get("userUuid").asText());
         String from = jsonNode.get("pickUpLocation").asText();
         String to = jsonNode.get("dropOffLocation").asText();
 
@@ -144,6 +145,7 @@ public class KafkaListeners {
 
         FundsAvailabilityResponse response = FundsAvailabilityResponse.builder()
                 .uuid(uuid)
+                .userUuid(userUuid)
                 .cost(cost)
                 .build();
 
