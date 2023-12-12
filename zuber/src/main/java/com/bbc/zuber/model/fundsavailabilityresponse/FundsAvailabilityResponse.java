@@ -1,4 +1,4 @@
-package com.bbc.zuber.model;
+package com.bbc.zuber.model.fundsavailabilityresponse;
 
 import lombok.Builder;
 import lombok.Data;

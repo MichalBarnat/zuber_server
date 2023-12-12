@@ -87,3 +87,15 @@ Nzuber/src/main/java/com/bbc/zuber/model/riderequest/enums/RideRequestType.java
 Qzuber/src/main/java/com/bbc/zuber/exceptions/KafkaMessageProcessingException.java,7\f\7fd97b54f37988c2dc03ac825417d971453954ac
 v
 Fzuber/src/main/java/com/bbc/zuber/model/FundsAvailabilityResponse.java,7\b\7b632ed80a72aad9bb7b5d8465577e134cd45562
+v
+Fzuber/src/main/java/com/bbc/zuber/exceptions/CarNotFoundException.java,0\b\0b2311c8f7da5b1fa70ab948ae8a5394eda2287d
+o
+?zuber/src/main/java/com/bbc/zuber/repository/CarRepository.java,1\e\1e2cfa882037208c916117eb47c50ab204e4407e
+i
+9zuber/src/main/java/com/bbc/zuber/service/CarService.java,2\2\22a98183cecd88875c07a81e890e3028c9ea4edc
+p
+@zuber/src/main/java/com/bbc/zuber/model/car/enums/TypeOfCar.java,e\a\eaeee19db63693149b00dafd64a131d429d5a89b
+s
+Czuber/src/main/java/com/bbc/zuber/model/car/enums/TypeOfEngine.java,0\e\0e0b268102a80f277be7e4c575844eac7f643962
+d
+4zuber/src/main/java/com/bbc/zuber/model/car/Car.java,f\a\fa8d62a20155fc9c0eb7e9c485ffa72aba43e06f

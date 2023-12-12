@@ -7,6 +7,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity(name = "users")
@@ -20,9 +22,10 @@ public class User {
     private UUID uuid;
     private String name;
     private String surname;
-    private String dob;
+    private LocalDate dob;
     @Enumerated(EnumType.STRING)
     private Sex sex;
     @Email(message = "Wrong email pattern. Check it once again!")
     private String email;
+    private BigDecimal balance;
 }

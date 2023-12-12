@@ -1,8 +1,7 @@
 package com.bbc.zuber.kafka;
 
 import com.bbc.zuber.exceptions.KafkaMessageProcessingException;
-import com.bbc.zuber.model.FundsAvailabilityResponse;
-import com.bbc.zuber.model.car.Car;
+import com.bbc.zuber.model.fundsavailabilityresponse.FundsAvailabilityResponse;
 import com.bbc.zuber.model.driver.Driver;
 import com.bbc.zuber.model.rideassignment.RideAssignment;
 import com.bbc.zuber.model.rideassignment.enums.RideAssignmentStatus;
@@ -140,6 +139,7 @@ public class KafkaListeners {
         UUID uuid = UUID.fromString(jsonNode.get("uuid").asText());
         String from = jsonNode.get("pickUpLocation").asText();
         String to = jsonNode.get("dropOffLocation").asText();
+
         BigDecimal cost = BigDecimal.valueOf(googleDistanceMatrixService.getDistanceInt(from, to) * 0.002);
 
         FundsAvailabilityResponse response = FundsAvailabilityResponse.builder()
@@ -148,7 +148,6 @@ public class KafkaListeners {
                 .build();
 
         String responseJson = objectMapper.writeValueAsString(response);
-
         kafkaTemplate.send("funds-availability-response", responseJson);
     }
 
