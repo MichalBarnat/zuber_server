@@ -37,7 +37,7 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler
-    public ResponseEntity<ErrorMessage> rideAssignmentNotFoundExceptionHandler(KafkaMessageProcessingException ex, HttpServletRequest request) {
+    public ResponseEntity<ErrorMessage> rideAssignmentNotFoundExceptionHandler(RideAssignmentNotFoundException ex, HttpServletRequest request) {
         return createErrorResponse(ex, request, HttpStatus.NOT_FOUND);
     }
 
