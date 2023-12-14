@@ -6,11 +6,13 @@ import com.bbc.zuber.model.driver.enums.Sex;
 import com.bbc.zuber.model.driver.enums.StatusDriver;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity(name = "drivers")
@@ -24,15 +26,30 @@ public class Driver {
     private UUID uuid;
     private String name;
     private String surname;
-    private String dob;
+    private LocalDate dob;
     @Enumerated(EnumType.STRING)
     private StatusDriver statusDriver;
     @Enumerated(EnumType.STRING)
     private Sex sex;
-    @Email(message = "Wrong email pattern. Check it once again!")
     private String email;
     private String location;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CAR_UUID", referencedColumnName = "uuid")
     private Car car;
+
+    @Override
+    public String toString() {
+        return "Driver{" +
+                "id=" + id +
+                ", uuid=" + uuid +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", dob=" + dob +
+                ", statusDriver=" + statusDriver +
+                ", sex=" + sex +
+                ", email='" + email + '\'' +
+                ", location='" + location + '\'' +
+                ", car=" + (car != null ? car.getUuid() : null) +
+                '}';
+    }
 }

@@ -86,8 +86,6 @@ Nzuber/src/main/java/com/bbc/zuber/model/riderequest/enums/RideRequestType.java
 Å
 Qzuber/src/main/java/com/bbc/zuber/exceptions/KafkaMessageProcessingException.java,7\f\7fd97b54f37988c2dc03ac825417d971453954ac
 v
-Fzuber/src/main/java/com/bbc/zuber/model/FundsAvailabilityResponse.java,7\b\7b632ed80a72aad9bb7b5d8465577e134cd45562
-v
 Fzuber/src/main/java/com/bbc/zuber/exceptions/CarNotFoundException.java,0\b\0b2311c8f7da5b1fa70ab948ae8a5394eda2287d
 o
 ?zuber/src/main/java/com/bbc/zuber/repository/CarRepository.java,1\e\1e2cfa882037208c916117eb47c50ab204e4407e

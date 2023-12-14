@@ -1,7 +1,7 @@
 package com.bbc.zuber.model.user;
 
+import com.bbc.zuber.model.user.enums.Sex;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,9 +23,7 @@ public class User {
     private String name;
     private String surname;
     private LocalDate dob;
-    @Enumerated(EnumType.STRING)
     private Sex sex;
-    @Email(message = "Wrong email pattern. Check it once again!")
     private String email;
     private BigDecimal balance;
 }
