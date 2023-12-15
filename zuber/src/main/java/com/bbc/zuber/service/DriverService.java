@@ -9,6 +9,7 @@ import com.bbc.zuber.repository.DriverRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import com.bbc.zuber.model.googledistancematrix.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -20,18 +21,24 @@ public class DriverService {
     private final DriverRepository driverRepository;
     private final GoogleDistanceMatrixService googleDistanceMatrixService;
 
+    @Transactional
     public Driver save(Driver driver) {
         return driverRepository.save(driver);
     }
 
+    //Page zamiast List
+    @Transactional(readOnly = true)
     public List<Driver> availableDrivers() {
         return driverRepository.findAllByStatusDriver(StatusDriver.AVAILABLE);
     }
 
+    //Page zamiast List
+    @Transactional(readOnly = true)
     public List<Driver> findAll() {
         return driverRepository.findAll();
     }
 
+    // zamiast findAll w repo findByUuid
     public Driver findByUUID(UUID uuid) {
         return findAll()
                 .stream()

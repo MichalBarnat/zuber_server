@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +17,7 @@ public class RideInfoService {
     private final KafkaTemplate<String, Object> kafkaTemplate;
     private final ObjectMapper objectMapper;
 
+    @Transactional
     public RideInfo save(RideInfo rideInfo) throws JsonProcessingException {
         RideInfo savedRideInfo = rideInfoRepository.save(rideInfo);
         String rideInfoJson = objectMapper.writeValueAsString(savedRideInfo);

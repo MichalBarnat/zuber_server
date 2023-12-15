@@ -1,0 +1,2 @@
+Download images etc.
+Terminal --> cd zuber --> docker-compose up -d

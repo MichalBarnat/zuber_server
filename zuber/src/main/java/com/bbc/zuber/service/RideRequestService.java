@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,18 +18,24 @@ public class RideRequestService {
     private final RideRequestRepository rideRequestRepository;
     private final ObjectMapper objectMapper;
 
+    @Transactional
     public RideRequest save(RideRequest rideRequest) {
         return rideRequestRepository.save(rideRequest);
     }
 
+    @Transactional(readOnly = true)
     public RideRequest findById(Long id) {
         return rideRequestRepository.findById(id).orElseThrow();
     }
 
+    //Page zamiast List
+    @Transactional(readOnly = true)
     public List<RideRequest> findAll() {
         return rideRequestRepository.findAll();
     }
 
+    // zamiast findAll w repo findByUuid
+    @Transactional(readOnly = true)
     public RideRequest findByUUID(UUID uuid) {
         return findAll()
                 .stream()

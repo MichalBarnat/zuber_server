@@ -1,0 +1,83 @@
+services:
+  postgres:
+    container_name: zuber_postgres
+    image: postgres
+    environment:
+      POSTGRES_DB: zuber_server
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: changeme
+      PGDATA: /data/postgres
+    volumes:
+      - zuber_postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - zuber_postgres
+    restart: unless-stopped
+
+  pgadmin_zuber_server:
+    container_name: pgadmin_zuber_server
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    volumes:
+      - pgadmin_zuber_server:/var/lib/pgadmin
+    ports:
+      - "5052:80"
+    networks:
+      - zuber_postgres
+    restart: unless-stopped
+
+  zookeeper_zuber_server:
+    image: zookeeper:3.7.0
+    container_name: zookeeper_zuber_server
+    restart: "no"
+    networks:
+      - kafka-zuber-server-net
+    ports:
+      - "2181:2181"
+
+  kafka_zuber_server:
+    image: obsidiandynamics/kafka
+    container_name: kafka_zuber_server
+    restart: "no"
+    networks:
+      - kafka-zuber-server-net
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: DOCKER_INTERNAL:PLAINTEXT,DOCKER_EXTERNAL:PLAINTEXT
+      KAFKA_LISTENERS: DOCKER_INTERNAL://:29092,DOCKER_EXTERNAL://:9092
+      KAFKA_ADVERTISED_LISTENERS: DOCKER_INTERNAL://kafka_zuber_server:29092,DOCKER_EXTERNAL://${DOCKER_HOST_IP:-127.0.0.1}:9092
+      KAFKA_INTER_BROKER_LISTENER_NAME: DOCKER_INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper_zuber_server:2181"
+      KAFKA_BROKER_ID: 1
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      - zookeeper_zuber_server
+
+  kafdrop_zuber_server:
+    image: obsidiandynamics/kafdrop
+    container_name: kafdrop_zuber_server
+    restart: "no"
+    networks:
+      - kafka-zuber-server-net
+    ports:
+      - "9000:9000"
+    environment:
+      KAFKA_BROKERCONNECT: "kafka_zuber_server:29092"
+    depends_on:
+      - "kafka_zuber_server"
+
+networks:
+  kafka-zuber-server-net:
+    name: kafka-zuber-server-net
+    driver: bridge
+  zuber_postgres:
+    driver: bridge
+
+volumes:
+  zuber_postgres:
+  pgadmin_zuber_server:

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,6 +19,7 @@ public class RideAssignmentService {
     private final KafkaTemplate<String, Object> kafkaTemplate;
     private final ObjectMapper objectMapper;
 
+    @Transactional
     public RideAssignment save(RideAssignment rideAssignment) throws JsonProcessingException {
         RideAssignment savedAssignment = rideAssignmentRepository.save(rideAssignment);
         String rideAssignmentJson = objectMapper.writeValueAsString(savedAssignment);
@@ -25,11 +27,13 @@ public class RideAssignmentService {
         return savedAssignment;
     }
 
+    @Transactional(readOnly = true)
     public RideAssignment findById(Long id) {
         return rideAssignmentRepository.findById(id).orElseThrow(
                 () -> new RideAssignmentNotFoundException(String.format("RideAssignment with id %d not found!", id)));
     }
 
+    @Transactional
     public RideAssignment updateStatus(Long id, boolean accepted) throws JsonProcessingException {
         RideAssignment rideAssignment = findById(id);
         if (accepted) {
