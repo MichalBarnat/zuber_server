@@ -3,8 +3,6 @@ w
 Gzuber/src/main/java/com/bbc/zuber/config/kafka/KafkaConsumerConfig.java,9\9\99088649aba94f81cc3fae792ad9a365cca2d1ed
 =
 zuber/pom.xml,3\c\3c818203ad55763c3bd798acb6f48deb84654cc0
-e
-5zuber/src/main/java/com/bbc/zuber/model/user/Sex.java,d\6\d6a097dfbadf2ade6ae46579ebc0de1a717a9aad
 f
 6zuber/src/main/java/com/bbc/zuber/model/user/User.java,c\c\cca6dee944b68797f6a9f0b1f3be25a016d1fa62
 k
