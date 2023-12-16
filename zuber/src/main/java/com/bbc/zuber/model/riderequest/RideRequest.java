@@ -19,7 +19,7 @@ public class RideRequest {
     @Id
     private Long id;
     private UUID uuid;
-    private UUID userId;
+    private UUID userUuid;
     private String pickUpLocation;
     private String dropOffLocation;
     @Enumerated(EnumType.STRING)

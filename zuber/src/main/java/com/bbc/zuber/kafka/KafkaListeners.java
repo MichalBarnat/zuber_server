@@ -113,7 +113,7 @@ public class KafkaListeners {
 
             RideInfo rideInfo = RideInfo.builder()
                     .rideAssignmentUuid(rideAssignment.getUuid())
-                    .userUuid(rideRequest.getUserId())
+                    .userUuid(rideRequest.getUserUuid())
                     .driverUuid(rideAssignment.getDriverUUID())
                     .driverName(driver.getName())
                     .driverLocation(driver.getLocation())
