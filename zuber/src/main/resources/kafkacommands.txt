@@ -6,6 +6,8 @@ cd /opt/bitnami/kafka/bin/
 
 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic user-registration --from-beginning
 kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic ride-info --from-beginning
+kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic funds-availability-response --from-beginning
+
 
 #DELETE TOPICS
 

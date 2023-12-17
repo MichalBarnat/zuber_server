@@ -8,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity(name = "rideRequests")
@@ -26,8 +27,6 @@ public class RideRequest {
     private RideRequestType type;
     @Enumerated(EnumType.STRING)
     private RideRequestSize size;
-    private String date;
+    private LocalDate date;
 }
-
-//todo localdate na date
 // jesli klient zamawia przejazd w godzinach nocnych to drozej 22:00/06:00 20% drozej

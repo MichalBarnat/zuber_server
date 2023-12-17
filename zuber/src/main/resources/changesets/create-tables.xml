@@ -38,8 +38,7 @@
             </column>
         </createTable>
     </changeSet>
-
-    <changeSet id="4" author="michal-barnat">
+    <changeSet id="3" author="michal-barnat">
         <createTable tableName="drivers">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="pk_drivers"/>
@@ -59,8 +58,7 @@
             </column>
         </createTable>
     </changeSet>
-
-    <changeSet id="6" author="michal">
+    <changeSet id="4" author="michal">
         <createTable tableName="ride_requests">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
@@ -78,10 +76,10 @@
             <column name="date" type="VARCHAR(255)"/>
         </createTable>
     </changeSet>
-    <changeSet id="7" author="michal">
+    <changeSet id="5" author="michal">
         <createSequence sequenceName="ride_assignments_seq" incrementBy="1" startValue="1"/>
     </changeSet>
-    <changeSet id="8" author="michal">
+    <changeSet id="6" author="michal">
         <createTable tableName="ride_assignments">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
@@ -102,10 +100,10 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="9" author="michal">
+    <changeSet id="7" author="michal">
         <createSequence sequenceName="ride_info_seq" incrementBy="1" startValue="1"/>
     </changeSet>
-    <changeSet id="10" author="michal">
+    <changeSet id="8" author="michal">
         <createTable tableName="ride_info">
             <column name="id" type="BIGINT">
                 <constraints nullable="false" primaryKey="true"/>
