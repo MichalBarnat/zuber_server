@@ -98,13 +98,11 @@ public class KafkaListeners {
     void rideAssignmentResponseListener(String rideAssignmentResponseJson) {
         try {
             RideAssignmentResponse rideAssignmentResponse = objectMapper.readValue(rideAssignmentResponseJson, RideAssignmentResponse.class);
-            logger.info("RIDE ASSIGNMENT RESPONSE ASSIGNMENT ID : {}",rideAssignmentResponse.getRideAssignmentId());
-            logger.info("NASZ STATUS TO: {}",rideAssignmentResponse.getAccepted());
             rideAssignmentService.updateStatus(rideAssignmentResponse.getRideAssignmentId(), rideAssignmentResponse.getAccepted());
 
             logger.info("Successfully updated RideAssignment status!");
 
-            RideAssignment rideAssignment = rideAssignmentService.findById(rideAssignmentResponse.getId());
+            RideAssignment rideAssignment = rideAssignmentService.findById(rideAssignmentResponse.getRideAssignmentId());
             RideRequest rideRequest = rideRequestService.findByUUID(rideAssignment.getRideRequestUUID());
             Driver driver = driverService.findByUUID(rideAssignment.getDriverUUID());
             LocalDateTime now = LocalDateTime.now();
@@ -112,6 +110,8 @@ public class KafkaListeners {
             String to = rideRequest.getDropOffLocation();
 
             int distanceBetween = googleDistanceMatrixService.getDistanceInt(from, to);
+
+            //todo jesli status to REJECTED to nie wysylaj ride info tylko wyslij info ze odrzucone
 
             RideInfo rideInfo = RideInfo.builder()
                     .rideAssignmentUuid(rideAssignment.getUuid())
