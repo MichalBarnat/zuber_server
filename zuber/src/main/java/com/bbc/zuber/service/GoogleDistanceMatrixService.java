@@ -43,7 +43,7 @@ public class GoogleDistanceMatrixService {
                 return distance.getValue();
             }
         }
-        return -1; // Zwróć -1 w przypadku błędu lub braku danych
+        return -1;
     }
 
     public String getDurationString(String origin, String destination) {
@@ -69,6 +69,6 @@ public class GoogleDistanceMatrixService {
                 return duration.getValue();
             }
         }
-        return -1; // Zwróć -1 w przypadku błędu lub braku danych
+        return -1;
     }
 }
