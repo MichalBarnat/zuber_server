@@ -161,7 +161,6 @@ public class KafkaListeners {
                     .orderTime(now)
                     .estimatedArrivalTime(now.plusSeconds(googleDistanceMatrixService.getDurationInt(from, to)))
                     .costOfRide(BigDecimal.valueOf(distanceBetween * 0.002))
-                    //todo zaimplementuj stawki czasowe
                     .timeToArrivalInMinutes(googleDistanceMatrixService.getDurationString(from, to))
                     .rideLengthInKilometers(googleDistanceMatrixService.getDistanceString(from, to))
                     .build();
@@ -172,9 +171,5 @@ public class KafkaListeners {
             logger.info("Ride assignment with id {} was REJECTED by driver.", rideAssignmentResponse.getRideAssignmentId());
         }
     }
-
-
-    //TODO oblsuzyc na topicu ride-cancel (zmienic assignment na status CANCELLED) i wyslac info do drivera i uzytkownika
-
 
 }

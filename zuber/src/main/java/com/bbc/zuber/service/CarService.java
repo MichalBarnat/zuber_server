@@ -32,14 +32,9 @@ public class CarService {
         return carRepository.findById(id).orElseThrow(() -> new CarNotFoundException(String.format("Car with id %d not found!", id)));
     }
 
-    // zamiast findAll w repo stworzyc findByUuid
-    // skroci kod
     @Transactional(readOnly = true)
     public Car findByUuid(UUID uuid) {
-        return findAll().stream()
-                .filter(car -> car.getUuid().equals(uuid))
-                .findFirst()
-                .orElseThrow(() -> new CarNotFoundException(String.format("Car with id %d not found!", uuid)));
+        return carRepository.findByUuid(uuid).orElseThrow(() -> new CarNotFoundException(String.format("Car with uuid %s not found!", uuid)));
     }
 
     //todo CarService metody na:
