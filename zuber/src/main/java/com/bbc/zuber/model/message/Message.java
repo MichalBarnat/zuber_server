@@ -30,4 +30,6 @@ public class Message {
     private String content;
     @Column(name = "date_time")
     private LocalDateTime dateTime;
+
+    //todo dac gdzies tu id konwersacji w ktorej zawiera sie ta wiadomosc
 }

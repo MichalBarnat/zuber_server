@@ -29,3 +29,5 @@ public class ServerAppApplication {
 //driver tez moze miec endpoint na sprawdzenie ilosci przejechanych km oraz czasu
 
 //user moze miec endpointy - wydane pieniadze
+
+// TODO maile! - kazdy odbyty przejazd ma wysylac raport z przejazdu do klienta i do kierowcy
