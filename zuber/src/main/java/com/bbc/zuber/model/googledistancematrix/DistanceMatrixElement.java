@@ -12,11 +12,18 @@ public class DistanceMatrixElement {
     @JsonProperty("duration")
     private DistanceMatrixDuration duration;
 
+    @JsonProperty("status")
+    private String status;
+
     public DistanceMatrixDistance getDistance() {
         return distance;
     }
 
     public DistanceMatrixDuration getDuration() {
         return duration;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

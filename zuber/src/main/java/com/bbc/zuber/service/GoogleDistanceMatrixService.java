@@ -1,17 +1,19 @@
 package com.bbc.zuber.service;
 
 import com.bbc.zuber.model.googledistancematrix.*;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@RequiredArgsConstructor
 public class GoogleDistanceMatrixService {
 
     @Value("${google.distance.matrix.api.key}")
     private String apiKey;
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
 
     public DistanceMatrixResponse getDistance(String origin, String destination) {
         String url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=" + origin +
@@ -22,12 +24,15 @@ public class GoogleDistanceMatrixService {
 
     public String getDistanceString(String origin, String destination) {
         DistanceMatrixResponse response = getDistance(origin, destination);
-        if ("OK".equals(response.getStatus())) {
-            DistanceMatrixRow row = response.getRows().get(0);
-            DistanceMatrixElement element = row.getElements().get(0);
-            DistanceMatrixDistance distance = element.getDistance();
-            if (distance != null) {
-                return distance.getText();
+
+        for (DistanceMatrixRow row : response.getRows()) {
+            for (DistanceMatrixElement element : row.getElements()) {
+                if ("OK".equals(element.getStatus())) {
+                    DistanceMatrixDistance distance = element.getDistance();
+                    if (distance != null) {
+                        return distance.getText();
+                    }
+                }
             }
         }
         return null;
@@ -35,12 +40,15 @@ public class GoogleDistanceMatrixService {
 
     public int getDistanceInt(String origin, String destination) {
         DistanceMatrixResponse response = getDistance(origin, destination);
-        if ("OK".equals(response.getStatus())) {
-            DistanceMatrixRow row = response.getRows().get(0);
-            DistanceMatrixElement element = row.getElements().get(0);
-            DistanceMatrixDistance distance = element.getDistance();
-            if (distance != null) {
-                return distance.getValue();
+        
+        for (DistanceMatrixRow row : response.getRows()) {
+            for (DistanceMatrixElement element : row.getElements()) {
+                if ("OK".equals(element.getStatus())) {
+                    DistanceMatrixDistance distance = element.getDistance();
+                    if (distance != null) {
+                        return distance.getValue();
+                    }
+                }
             }
         }
         return -1;
@@ -48,12 +56,15 @@ public class GoogleDistanceMatrixService {
 
     public String getDurationString(String origin, String destination) {
         DistanceMatrixResponse response = getDistance(origin, destination);
-        if ("OK".equals(response.getStatus())) {
-            DistanceMatrixRow row = response.getRows().get(0);
-            DistanceMatrixElement element = row.getElements().get(0);
-            DistanceMatrixDuration duration = element.getDuration();
-            if (duration != null) {
-                return duration.getText();
+
+        for (DistanceMatrixRow row : response.getRows()) {
+            for (DistanceMatrixElement element : row.getElements()) {
+                if("OK".equals(element.getStatus())) {
+                    DistanceMatrixDistance duration = element.getDistance();
+                    if(duration != null) {
+                        return duration.getText();
+                    }
+                }
             }
         }
         return null;
@@ -61,12 +72,14 @@ public class GoogleDistanceMatrixService {
 
     public int getDurationInt(String origin, String destination) {
         DistanceMatrixResponse response = getDistance(origin, destination);
-        if ("OK".equals(response.getStatus())) {
-            DistanceMatrixRow row = response.getRows().get(0);
-            DistanceMatrixElement element = row.getElements().get(0);
-            DistanceMatrixDuration duration = element.getDuration();
-            if (duration != null) {
-                return duration.getValue();
+        for (DistanceMatrixRow row : response.getRows()) {
+            for (DistanceMatrixElement element : row.getElements()) {
+                if("OK".equals(element.getStatus())) {
+                    DistanceMatrixDuration duration = element.getDuration();
+                    if(duration != null) {
+                        return duration.getValue();
+                    }
+                }
             }
         }
         return -1;
