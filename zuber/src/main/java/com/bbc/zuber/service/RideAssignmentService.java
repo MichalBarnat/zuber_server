@@ -11,6 +11,8 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class RideAssignmentService {
@@ -33,6 +35,11 @@ public class RideAssignmentService {
                 () -> new RideAssignmentNotFoundException(String.format("RideAssignment with id %d not found!", id)));
     }
 
+    @Transactional(readOnly = true)
+    public RideAssignment findByUuid(UUID uuid) {
+        return rideAssignmentRepository.findByUuid(uuid).orElseThrow(() -> new RideAssignmentNotFoundException(String.format("RideAssignment with uuid %s don't exist!", uuid)));
+    }
+
     @Transactional
     public RideAssignment updateStatus(Long id, boolean accepted) throws JsonProcessingException {
         RideAssignment rideAssignment = findById(id);
@@ -42,5 +49,9 @@ public class RideAssignmentService {
             rideAssignment.setStatus(RideAssignmentStatus.REJECTED);
         }
         return save(rideAssignment);
+    }
+
+    public Boolean existsByUuid(UUID uuid) {
+        return rideAssignmentRepository.existsByUuid(uuid);
     }
 }

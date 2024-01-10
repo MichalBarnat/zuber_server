@@ -6,12 +6,14 @@ import com.bbc.zuber.model.fundsavailabilityresponse.FundsAvailabilityResponse;
 import com.bbc.zuber.model.rideassignment.RideAssignment;
 import com.bbc.zuber.model.rideassignment.enums.RideAssignmentStatus;
 import com.bbc.zuber.model.rideassignmentresponse.RideAssignmentResponse;
+import com.bbc.zuber.model.ridecancel.RideCancel;
 import com.bbc.zuber.model.rideinfo.RideInfo;
 import com.bbc.zuber.model.riderequest.RideRequest;
 import com.bbc.zuber.model.user.User;
 import com.bbc.zuber.service.DriverService;
 import com.bbc.zuber.service.GoogleDistanceMatrixService;
 import com.bbc.zuber.service.RideAssignmentService;
+import com.bbc.zuber.service.RideCancelService;
 import com.bbc.zuber.service.RideInfoService;
 import com.bbc.zuber.service.RideRequestService;
 import com.bbc.zuber.service.UserService;
@@ -42,6 +44,7 @@ public class KafkaListeners {
     private final RideInfoService rideInfoService;
     private final ObjectMapper objectMapper;
     private final GoogleDistanceMatrixService googleDistanceMatrixService;
+    private final RideCancelService rideCancelService;
     private final KafkaProducerService kafkaProducerService;
 
     @KafkaListener(topics = "user-registration")
@@ -172,4 +175,14 @@ public class KafkaListeners {
         }
     }
 
+    @KafkaListener(topics = "ride-cancel")
+    void rideCancelListener(String rideCancelResponseJson) throws JsonProcessingException {
+        RideCancel rideCancel = objectMapper.readValue(rideCancelResponseJson, RideCancel.class);
+        UUID rideUUID = rideCancel.getRideAssignmentUuid();
+
+        rideCancelService.cancelRideAssignment(rideUUID);
+    }
+
 }
+
+
