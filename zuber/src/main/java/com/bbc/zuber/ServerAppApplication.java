@@ -21,6 +21,7 @@ public class ServerAppApplication {
 	// kafdrop - tez przez deocker compose gdzies wygooglowac
 }
 
+// 04.01.2024 maile! - kazdy odbyty przejazd ma wysylac raport z przejazdu do klienta i do kierowcy
 // dostajemy RideInfo o tym ze driver jedzie do nas - stworzyc opcje rezygnacji
 // po przejechanej trasie serwer wysyla informacje do usera i drivera o zakonczonym przejezdzie
 // na podsawie zakonczonej jazdy mozemy wystawic ocene oraz dac napiwek<optional>
@@ -30,4 +31,8 @@ public class ServerAppApplication {
 
 //user moze miec endpointy - wydane pieniadze
 
-// TODO maile! - kazdy odbyty przejazd ma wysylac raport z przejazdu do klienta i do kierowcy
+// 11.01.2024
+// QueryDsl
+// CheckStyle na każdym serwisie
+//
+

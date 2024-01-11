@@ -113,3 +113,9 @@ p
 @zuber/src/test/java/com/bbc/zuber/ServerAppApplicationTests.java,b\d\bd4c9956c88137f79e8b0186406cea49e6d3a1f4
 €
 Pzuber/src/test/java/com/bbc/zuber/service/GoogleDistanceMatrixServiceTest.groovy,7\7\777abce574f888ac9a2695bb3c2ff767f56c322e
+r
+Bzuber/src/main/java/com/bbc/zuber/model/ridecancel/RideCancel.java,f\9\f913e76b7b42afc13a25c085560c8e7ac7ef9241
+p
+@zuber/src/main/java/com/bbc/zuber/service/RideCancelService.java,6\d\6d156b391398189b9e96b9b152e48c5d0b9b3f41
+k
+;zuber/src/main/java/com/bbc/zuber/service/EmailService.java,b\7\b7ccfbb05c0a2a9fb9c5c6b0c4300a21ac784ec3
