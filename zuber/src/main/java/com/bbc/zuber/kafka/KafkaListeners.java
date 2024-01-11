@@ -11,6 +11,7 @@ import com.bbc.zuber.model.rideinfo.RideInfo;
 import com.bbc.zuber.model.riderequest.RideRequest;
 import com.bbc.zuber.model.user.User;
 import com.bbc.zuber.service.DriverService;
+import com.bbc.zuber.service.EmailService;
 import com.bbc.zuber.service.GoogleDistanceMatrixService;
 import com.bbc.zuber.service.RideAssignmentService;
 import com.bbc.zuber.service.RideCancelService;
@@ -45,6 +46,7 @@ public class KafkaListeners {
     private final ObjectMapper objectMapper;
     private final GoogleDistanceMatrixService googleDistanceMatrixService;
     private final RideCancelService rideCancelService;
+    private final EmailService emailService;
     private final KafkaProducerService kafkaProducerService;
 
     @KafkaListener(topics = "user-registration")
@@ -170,8 +172,12 @@ public class KafkaListeners {
 
             rideInfoService.save(rideInfo);
             kafkaProducerService.sendRideInfo(rideInfo);
+            emailService.sendRideInfoWhenRideRequestAcceptedToUser(rideInfo);
+            emailService.sendRideInfoWhenRideRequestAcceptedToDriver(rideInfo);
         } else {
             logger.info("Ride assignment with id {} was REJECTED by driver.", rideAssignmentResponse.getRideAssignmentId());
+            emailService.sendRideInfoWhenRideRequestRejectedToUser(rideAssignmentResponse);
+            emailService.sendRideInfoWhenRideRequestRejectedToDriver(rideAssignmentResponse);
         }
     }
 
