@@ -1,6 +1,7 @@
 package com.bbc.zuber.service
 
 import com.bbc.zuber.model.googledistancematrix.DistanceMatrixDistance
+import com.bbc.zuber.model.googledistancematrix.DistanceMatrixDuration
 import com.bbc.zuber.model.googledistancematrix.DistanceMatrixElement
 import com.bbc.zuber.model.googledistancematrix.DistanceMatrixResponse
 import com.bbc.zuber.model.googledistancematrix.DistanceMatrixRow
@@ -43,7 +44,7 @@ class GoogleDistanceMatrixServiceTest extends Specification {
     def "should return correct duration String from API"() {
         given:
         DistanceMatrixResponse mockResponse = new DistanceMatrixResponse(status: "OK", rows: [
-                new DistanceMatrixRow(elements: [new DistanceMatrixElement(distance: new DistanceMatrixDistance(text: "3 godz. 25 min", value: 12280), status: "OK")])
+                new DistanceMatrixRow(elements: [new DistanceMatrixElement(duration: new DistanceMatrixDuration(text: "3 godz. 25 min", value: 12280), status: "OK")])
         ])
         restTemplate.getForObject(_, DistanceMatrixResponse.class) >> mockResponse
 
@@ -57,12 +58,12 @@ class GoogleDistanceMatrixServiceTest extends Specification {
     def "should return correct duration Integer from API"() {
         given:
         DistanceMatrixResponse mockResponse = new DistanceMatrixResponse(status: "OK", rows: [
-                new DistanceMatrixRow(elements: [new DistanceMatrixElement(distance: new DistanceMatrixDistance(text: "3 godz. 25 min", value: 12280), status: "OK")])
+                new DistanceMatrixRow(elements: [new DistanceMatrixElement(duration: new DistanceMatrixDuration(text: "3 godz. 25 min", value: 12280), status: "OK")])
         ])
         restTemplate.getForObject(_, DistanceMatrixResponse.class) >> mockResponse
 
         when:
-        def result = service.getDistanceInt("from", "to")
+        def result = service.getDurationInt("from", "to")
 
         then:
         result == 12280

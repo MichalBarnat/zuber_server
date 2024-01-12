@@ -60,7 +60,7 @@ public class GoogleDistanceMatrixService {
         for (DistanceMatrixRow row : response.getRows()) {
             for (DistanceMatrixElement element : row.getElements()) {
                 if("OK".equals(element.getStatus())) {
-                    DistanceMatrixDistance duration = element.getDistance();
+                    DistanceMatrixDuration duration = element.getDuration();
                     if(duration != null) {
                         return duration.getText();
                     }
