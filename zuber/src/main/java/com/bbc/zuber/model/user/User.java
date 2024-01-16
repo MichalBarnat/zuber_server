@@ -31,4 +31,5 @@ public class User {
     private Sex sex;
     private String email;
     private BigDecimal balance;
+    private Boolean isDeleted = false;
 }

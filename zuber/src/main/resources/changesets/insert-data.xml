@@ -3,6 +3,7 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
     <changeSet author="michal" id="1">
         <loadData encoding="UTF-8" file="changesets/data/users.csv" quotchar="&quot;" separator="," tableName="users">
             <column header="id" name="id"/>
@@ -14,6 +15,7 @@
             <column header="email" name="email"/>
         </loadData>
     </changeSet>
+
     <changeSet author="michal" id="2">
         <loadData encoding="UTF-8" file="changesets/data/cars.csv" quotchar="&quot;" separator="," tableName="cars">
             <column header="id" name="id"/>
@@ -27,6 +29,7 @@
             <column header="plate_num" name="plate_num"/>
         </loadData>
     </changeSet>
+
     <changeSet author="michal" id="3">
         <loadData encoding="UTF-8" file="changesets/data/drivers.csv" quotchar="&quot;" separator="," tableName="drivers">
             <column header="id" name="id"/>
@@ -40,6 +43,7 @@
             <column header="location" name="location"/>
         </loadData>
     </changeSet>
+
     <!-- Dodanie kluczy obcych do tabeli cars -->
     <changeSet author="michal" id="4">
         <sql>
@@ -61,4 +65,65 @@
             UPDATE drivers SET car_uuid = '72f466e1-1202-4efe-8a9d-498cc513a8cc' WHERE id = 5;
         </sql>
     </changeSet>
+
+    <changeSet id="6" author="michal">
+        <loadData encoding="UTF-8" file="changesets/data/ride_requests.csv" quotchar="&quot;" separator=","
+                  tableName="ride_requests">
+            <column header="id" name="id"/>
+            <column header="uuid" name="uuid"/>
+            <column header="userUuid" name="user_uuid"/>
+            <column header="pickUpLocation" name="pick_up_location"/>
+            <column header="dropOffLocation" name="drop_off_location"/>
+            <column header="type" name="type"/>
+            <column header="size" name="size"/>
+            <column header="date" name="date"/>
+        </loadData>
+    </changeSet>
+
+    <changeSet id="7_1" author="michal">
+        <loadData encoding="UTF-8" file="changesets/data/ride_assignments.csv" quotchar="&quot;" separator=","
+                  tableName="ride_assignments">
+            <column header="id" name="id"/>
+            <column header="uuid" name="uuid"/>
+            <column header="rideRequestUUID" name="ride_request_uuid"/>
+            <column header="driverUUID" name="driver_uuid"/>
+            <column header="pickUpLocation" name="pick_up_location"/>
+            <column header="dropOffLocation" name="drop_off_location"/>
+            <column header="status" name="status"/>
+        </loadData>
+    </changeSet>
+
+    <!--- UPDATE SEQUENCE NUMBER AFTER ADDING TESTING DATA -->
+    <changeSet id="7_2" author="michal">
+        <sql>
+            SELECT setval('ride_assignments_seq', COALESCE((SELECT MAX(id)+1 FROM ride_assignments), 1), false);
+        </sql>
+    </changeSet>
+
+    <changeSet id="8_1" author="michal">
+        <loadData encoding="UTF-8" file="changesets/data/ride_info.csv" quotchar="&quot;" separator=","
+                  tableName="ride_info">
+            <column header="id" name="id"/>
+            <column header="rideAssignmentUuid" name="ride_assignment_uuid"/>
+            <column header="userUuid" name="user_uuid"/>
+            <column header="driverUuid" name="driver_uuid"/>
+            <column header="driverName" name="driver_name"/>
+            <column header="driverLocation" name="driver_location"/>
+            <column header="pickUpLocation" name="pick_up_location"/>
+            <column header="dropUpLocation" name="drop_up_location"/>
+            <column header="orderTime" name="order_time" type="TIMESTAMP"/>
+            <column header="estimatedArrivalTime" name="estimated_arrival_time" type="TIMESTAMP"/>
+            <column header="costOfRide" name="cost_of_ride" type="DECIMAL"/>
+            <column header="timeToArrivalInMinutes" name="time_to_arrival_in_minutes"/>
+            <column header="rideLengthInKilometers" name="ride_length_in_kilometers"/>
+        </loadData>
+    </changeSet>
+
+    <!--- UPDATE SEQUENCE NUMBER AFTER ADDING TESTING DATA -->
+    <changeSet id="8_2" author="michal">
+        <sql>
+            SELECT setval('ride_info_seq', COALESCE((SELECT MAX(id)+1 FROM ride_info), 1), false);
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
