@@ -4,6 +4,7 @@ package com.bbc.zuber.model.driver;
 import com.bbc.zuber.model.car.Car;
 import com.bbc.zuber.model.driver.enums.Sex;
 import com.bbc.zuber.model.driver.enums.StatusDriver;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -35,6 +36,7 @@ public class Driver {
     private String location;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CAR_UUID", referencedColumnName = "uuid")
+    @JsonManagedReference
     private Car car;
 
     @Override

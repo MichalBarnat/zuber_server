@@ -1,8 +1,8 @@
 
-v
-java:S2229+"T"findAll's" @Transactional requirement is incompatible with the one for this method.(êÏ—†øÿÿÿÿ8€ü§Í1
 z
-java:S22293"]"availableDrivers's" @Transactional requirement is incompatible with the one for this method.(“«Ä8€ü§Í1
+java:S2229/"]"availableDrivers's" @Transactional requirement is incompatible with the one for this method.(“«Ä8ğ™âÅÑ1
 t
-java:S37762"RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(ğÖà¡øÿÿÿÿ8âòæ‚Ã1
-]	java:S125F"<This block of commented-out lines of code should be removed.(Í‚âºüÿÿÿÿ8Ù“øÃ1
+java:S3776."RRefactor this method to reduce its Cognitive Complexity from 23 to the 15 allowed.(ğÖà¡øÿÿÿÿ8ô™âÅÑ1
+r
+java:S6809/"UCall transactional methods via an injected dependency instead of directly via 'this'.(“«Ä8ô™âÅÑ1
+]	java:S125B"<This block of commented-out lines of code should be removed.(Í‚âºüÿÿÿÿ8ö™âÅÑ1

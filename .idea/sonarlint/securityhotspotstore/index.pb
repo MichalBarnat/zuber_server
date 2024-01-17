@@ -133,3 +133,5 @@ t
 Dzuber/src/main/java/com/bbc/zuber/controller/RideInfoController.java,2\5\250466455f677287dfa7462f538787e0ebdc3f78
 p
 @zuber/src/main/java/com/bbc/zuber/service/StatisticsService.java,2\a\2aedae730105edecadcc2709f9ff9e6c3cb0fa02
+x
+Hzuber/src/main/java/com/bbc/zuber/model/statistics/DriverStatistics.java,6\a\6a3da063289d07b15eb7989614de890e8b699e14

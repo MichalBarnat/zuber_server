@@ -3,6 +3,7 @@ package com.bbc.zuber.model.car;
 import com.bbc.zuber.model.car.enums.TypeOfCar;
 import com.bbc.zuber.model.car.enums.TypeOfEngine;
 import com.bbc.zuber.model.driver.Driver;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,5 +32,6 @@ public class Car {
     private String plateNum;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "DRIVER_UUID", referencedColumnName = "uuid")
+    @JsonBackReference
     private Driver driver;
 }

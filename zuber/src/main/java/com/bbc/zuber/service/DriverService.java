@@ -38,13 +38,9 @@ public class DriverService {
         return driverRepository.findAll();
     }
 
-    // zamiast findAll w repo findByUuid
+    @Transactional(readOnly = true)
     public Driver findByUUID(UUID uuid) {
-        return findAll()
-                .stream()
-                .filter(driver -> driver.getUuid().equals(uuid))
-                .findFirst()
-                .orElseThrow(() -> new DriverNotFoundException(String.format("Driver with uuid: %s not found!", uuid)));
+        return driverRepository.findByUuid(uuid).orElseThrow(() -> new DriverNotFoundException(String.format("Driver with uuid: %s not found!", uuid)));
     }
 
     public Driver getNearestAvailableDriver(String pickUpLocation) {
@@ -86,5 +82,7 @@ public class DriverService {
 
         return nearestDriver;
     }
+
+
 
 }
