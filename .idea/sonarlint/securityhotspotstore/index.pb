@@ -119,3 +119,17 @@ r
 Bzuber/src/main/java/com/bbc/zuber/model/ridecancel/RideCancel.java,f\9\f913e76b7b42afc13a25c085560c8e7ac7ef9241
 k
 ;zuber/src/main/java/com/bbc/zuber/service/EmailService.java,b\7\b7ccfbb05c0a2a9fb9c5c6b0c4300a21ac784ec3
+ê
+`zuber/src/main/java/com/bbc/zuber/model/fundsavailabilityresponse/FundsAvailabilityResponse.java,2\4\247b2e6e5061a814f489529180a7f74cc69828a9
+u
+Ezuber/src/main/java/com/bbc/zuber/model/rideinfo/dto/RideInfoDto.java,b\c\bc8b33ec25508ed85c208c2aa7792eee5ce19ef9
+à
+Xzuber/src/main/java/com/bbc/zuber/mappings/CreateRideInfoCommandToPageableConverter.java,1\9\198ab8661738e0cb6d64bcacf22a69bb4789dc58
+v
+Fzuber/src/main/java/com/bbc/zuber/mappings/RideInfoToDtoConverter.java,b\a\ba7a4eab82b376236cfe2eda667ef5b44c86fc46
+É
+Szuber/src/main/java/com/bbc/zuber/model/rideinfo/command/CreateRideInfoCommand.java,b\b\bbeb7bccd2fd8debea43684a90c735a848abd63c
+t
+Dzuber/src/main/java/com/bbc/zuber/controller/RideInfoController.java,2\5\250466455f677287dfa7462f538787e0ebdc3f78
+p
+@zuber/src/main/java/com/bbc/zuber/service/StatisticsService.java,2\a\2aedae730105edecadcc2709f9ff9e6c3cb0fa02
