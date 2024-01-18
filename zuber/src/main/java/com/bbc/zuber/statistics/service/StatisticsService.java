@@ -1,10 +1,11 @@
-package com.bbc.zuber.service;
+package com.bbc.zuber.statistics.service;
 
 import com.bbc.zuber.model.driver.Driver;
 import com.bbc.zuber.model.rideinfo.QRideInfo;
 import com.bbc.zuber.model.rideinfo.RideInfo;
-import com.bbc.zuber.model.statistics.DriverStatistics;
 import com.bbc.zuber.repository.RideInfoRepository;
+import com.bbc.zuber.service.DriverService;
+import com.bbc.zuber.statistics.model.DriverStatistics;
 import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;

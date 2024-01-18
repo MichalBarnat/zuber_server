@@ -1,4 +1,4 @@
-package com.bbc.zuber.model.statistics;
+package com.bbc.zuber.statistics.model;
 
 import com.bbc.zuber.model.driver.Driver;
 import lombok.Builder;
