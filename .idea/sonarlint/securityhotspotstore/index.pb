@@ -141,3 +141,13 @@ Czuber/src/main/java/com/bbc/zuber/statistics/StatisticsService.java,b\9\b93800
 Kzuber/src/main/java/com/bbc/zuber/statistics/service/StatisticsService.java,9\d\9da4ec047be0ab48ca57cd92d7e8fe43280e3d0f
 x
 Hzuber/src/main/java/com/bbc/zuber/statistics/model/DriverStatistics.java,b\f\bfa25f46d5649c7561abcea3b03db21269f6a283
+v
+Fzuber/src/main/java/com/bbc/zuber/statistics/model/UserStatistics.java,a\0\a05a35bab9352d513dde81cb532bcc75a5eb646d
+v
+Fzuber/src/main/java/com/bbc/zuber/controller/StatisticsController.java,4\a\4aaa7568744ad89aa97605b8f2a2cd3588d452f7
+†
+Vzuber/src/main/java/com/bbc/zuber/statistics/model/user/UserWaitingTimeStatistics.java,3\2\322998c248027d4b8b7da9427cde2094991409a8
+‡
+Wzuber/src/main/java/com/bbc/zuber/statistics/model/user/UsersWaitingTimeStatistics.java,b\f\bf4655414b00b61f8a5cf3a0ea2ae7cfba8fa12d
+{
+Kzuber/src/main/java/com/bbc/zuber/statistics/model/user/UserStatistics.java,d\2\d2780f7418ed19b6290ed79d508139bcc03272f4

@@ -8,6 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class RideInfoService {
@@ -21,6 +24,11 @@ public class RideInfoService {
     @Transactional(readOnly = true)
     public Page<RideInfo> findAll(Pageable pageable) {
         return rideInfoRepository.findAll(pageable);
+    }
+
+    @Transactional(readOnly = true)
+    public List<RideInfo> findByOrderTimeBetween(LocalDateTime from, LocalDateTime to) {
+        return rideInfoRepository.findByOrderTimeBetween(from, to);
     }
 
 }
