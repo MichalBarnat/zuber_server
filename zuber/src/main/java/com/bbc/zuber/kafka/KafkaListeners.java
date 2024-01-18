@@ -3,6 +3,8 @@ package com.bbc.zuber.kafka;
 import com.bbc.zuber.exceptions.KafkaMessageProcessingException;
 import com.bbc.zuber.model.driver.Driver;
 import com.bbc.zuber.model.fundsavailabilityresponse.FundsAvailabilityResponse;
+import com.bbc.zuber.model.message.Message;
+import com.bbc.zuber.model.message.command.CreateMessageCommand;
 import com.bbc.zuber.model.rideassignment.RideAssignment;
 import com.bbc.zuber.model.rideassignment.enums.RideAssignmentStatus;
 import com.bbc.zuber.model.rideassignmentresponse.RideAssignmentResponse;
@@ -13,6 +15,7 @@ import com.bbc.zuber.model.user.User;
 import com.bbc.zuber.service.DriverService;
 import com.bbc.zuber.service.EmailService;
 import com.bbc.zuber.service.GoogleDistanceMatrixService;
+import com.bbc.zuber.service.MessageService;
 import com.bbc.zuber.service.RideAssignmentService;
 import com.bbc.zuber.service.RideCancelService;
 import com.bbc.zuber.service.RideInfoService;
@@ -22,6 +25,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -43,11 +47,12 @@ public class KafkaListeners {
     private final RideRequestService rideRequestService;
     private final RideAssignmentService rideAssignmentService;
     private final RideInfoService rideInfoService;
-    private final ObjectMapper objectMapper;
     private final GoogleDistanceMatrixService googleDistanceMatrixService;
     private final RideCancelService rideCancelService;
-    private final EmailService emailService;
     private final KafkaProducerService kafkaProducerService;
+    private final MessageService messageService;
+    private final EmailService emailService;
+    private final ObjectMapper objectMapper;
 
     @KafkaListener(topics = "user-registration")
     void userRegistrationListener(String userJson) {
@@ -189,6 +194,25 @@ public class KafkaListeners {
         rideCancelService.cancelRideAssignment(rideUUID);
     }
 
+    @KafkaListener(topics = "user-message")
+    void userMessageListener(String messageJson) throws JsonProcessingException {
+        CreateMessageCommand command = objectMapper.readValue(messageJson, CreateMessageCommand.class);
+
+        User user = userService.findByUuid(command.getSenderUuid());
+
+        Message message = messageService.saveMessageFromUserToConversation(command);
+        kafkaProducerService.sendMessageToUser(message, user);
+    }
+
+    @KafkaListener(topics = "driver-message")
+    void driverMessageListener(String messageJson) throws JsonProcessingException {
+        CreateMessageCommand command = objectMapper.readValue(messageJson, CreateMessageCommand.class);
+
+        Driver driver = driverService.findByUUID(command.getSenderUuid());
+
+        Message message = messageService.saveMessageFromDriverToConversation(command);
+        kafkaProducerService.sendMessageToDriver(message, driver);
+    }
 }
 
 

@@ -8,9 +8,14 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface RideInfoRepository extends JpaRepository<RideInfo, Long>, QuerydslPredicateExecutor<RideInfo> {
     Page<RideInfo> findAll(Pageable pageable);
 
     List<RideInfo> findByOrderTimeBetween(LocalDateTime from, LocalDateTime to);
+
+    Optional<RideInfo> findByUserUuid(UUID userUuid);
+    Optional<RideInfo> findByDriverUuid(UUID driverUuid);
 }

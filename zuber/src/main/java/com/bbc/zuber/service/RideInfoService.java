@@ -1,5 +1,6 @@
 package com.bbc.zuber.service;
 
+import com.bbc.zuber.exceptions.RideInfoNotFoundException;
 import com.bbc.zuber.model.rideinfo.RideInfo;
 import com.bbc.zuber.repository.RideInfoRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
+
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -31,4 +34,9 @@ public class RideInfoService {
         return rideInfoRepository.findByOrderTimeBetween(from, to);
     }
 
+    @Transactional(readOnly = true)
+    public RideInfo findByDriverUuid(UUID driverUuid) {
+        return rideInfoRepository.findByDriverUuid(driverUuid)
+                .orElseThrow(() -> new RideInfoNotFoundException("Ride info with driver uuid: " + driverUuid + " not found!"));
+    }
 }
